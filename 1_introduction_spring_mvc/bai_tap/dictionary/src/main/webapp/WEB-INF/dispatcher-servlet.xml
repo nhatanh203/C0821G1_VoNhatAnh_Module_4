@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 <!--    quét thư mục và tạo bean-->
-    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="codegym.com"/>
 
 <!--    Xem lại cái thẻ dưới-->
     <mvc:annotation-driven/>

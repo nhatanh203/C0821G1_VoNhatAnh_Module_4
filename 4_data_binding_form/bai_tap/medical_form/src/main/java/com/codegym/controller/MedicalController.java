@@ -27,24 +27,25 @@ public class MedicalController {
 
     @PostMapping("/medical_form")
     public String updateMedicalDeclaration(@ModelAttribute("medical") Medical medical, Model model){
-
-        model.addAttribute("hoTen", medical.getHoTen());
-        model.addAttribute("namSinh", medical.getNamSinh());
-        model.addAttribute("gioiTinh", medical.getGioiTinh());
-        model.addAttribute("quocTich", medical.getQuocTich());
-        model.addAttribute("cmnd", medical.getCmnd());
-        model.addAttribute("bienSoXe", medical.getBienSo());
-        model.addAttribute("thongTinDiLai", medical.getThongTinDilai());
-        model.addAttribute("soGhe", medical.getSoGhe());
-        model.addAttribute("ngayKhoiHanh", medical.getNgayKhoiHanh());
-        model.addAttribute("ngayKetThuc", medical.getNgayKetThuc());
-        model.addAttribute("moTa", medical.getMoTa());
-        model.addAttribute("diaChiLienLac", medical.getDiaChiLienLac());
-        model.addAttribute("diaChiNoiO", medical.getDiaChiNoiO());
-        model.addAttribute("soDienThoai", medical.getSoDienThoai());
-        model.addAttribute("email", medical.getEmail());
-        model.addAttribute("trieuChung", medical.getTrieuChung());
-        model.addAttribute("lichSuPhoiNhiem", medical.getLichSuPhoiNhiem());
+//
+//        model.addAttribute("hoTen", medical.getHoTen());
+//        model.addAttribute("namSinh", medical.getNamSinh());
+//        model.addAttribute("gioiTinh", medical.getGioiTinh());
+//        model.addAttribute("quocTich", medical.getQuocTich());
+//        model.addAttribute("cmnd", medical.getCmnd());
+//        model.addAttribute("bienSoXe", medical.getBienSo());
+//        model.addAttribute("thongTinDiLai", medical.getThongTinDilai());
+//        model.addAttribute("soGhe", medical.getSoGhe());
+//        model.addAttribute("ngayKhoiHanh", medical.getNgayKhoiHanh());
+//        model.addAttribute("ngayKetThuc", medical.getNgayKetThuc());
+//        model.addAttribute("moTa", medical.getMoTa());
+//        model.addAttribute("diaChiLienLac", medical.getDiaChiLienLac());
+//        model.addAttribute("diaChiNoiO", medical.getDiaChiNoiO());
+//        model.addAttribute("soDienThoai", medical.getSoDienThoai());
+//        model.addAttribute("email", medical.getEmail());
+//        model.addAttribute("trieuChung", medical.getTrieuChung());
+//        model.addAttribute("lichSuPhoiNhiem", medical.getLichSuPhoiNhiem());
+        model.addAttribute("medical",medical);
         return "medical_form";
     }
 }

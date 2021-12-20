@@ -13,7 +13,7 @@
 <body>
 <form method="post" action="/result">
     <label>
-        <input type="search" name="word">
+        <input type="search" name="engLish">
     </label>
     <input type="submit" value="Search">
 </form>

@@ -12,6 +12,6 @@
 </head>
 <body>
 <h2><strong>Result : </strong></h2>
-<h2 style="color:red">${word}</h2>
+<h2 style="color:red">${result}</h2>
 </body>
 </html>
