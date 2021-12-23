@@ -1,4 +1,13 @@
 package com.codegym.repository;
 
-public class Repository {
+import java.util.List;
+
+public interface Repository<T> {
+    List<T> findAll();
+
+    T findById(int id);
+
+    void save(T model);
+
+    void remove(int id);
 }

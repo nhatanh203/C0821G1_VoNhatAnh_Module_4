@@ -2,14 +2,17 @@ package com.codegym.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "blog")
+@Entity(name = "blog")
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "content")
     private String content;
+
 
     public Blog(String title, String content) {
         this.title = title;

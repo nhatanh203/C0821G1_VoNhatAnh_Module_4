@@ -2,27 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Post</title>
 </head>
 <body>
-<h2>Create Product</h2>
-
-<form action="/create" method="post" th:object="${productCreate}">
-    <div>Id</div>
+<a href="/blog">Back to Post list</a>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<h1>Create Blog</h1>
+<form th:action="@{/blog/create}" th:object="${blog}" method="post" novalidate="novalidate">
     <div>
-        <input th:field="*{id}">
-    </div>
-    <div>Name</div>
-    <div>
-        <input th:field="*{name}">
-    </div>
-    <div>Price</div>
-    <div>
-        <input th:field="*{price}">
+        <label>Title: </label>
+        <input type="text" th:field="*{title}">
     </div>
     <div>
-        <input type="submit" value="Create">
+        <label>Content: </label>
+        <input type="text" th:field="*{content}">
     </div>
+    <input type="submit" value="Create">
 </form>
 </body>
 </html>

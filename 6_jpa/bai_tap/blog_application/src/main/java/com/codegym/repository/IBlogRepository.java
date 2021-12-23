@@ -1,4 +1,6 @@
 package com.codegym.repository;
 
-public interface IBlogRepository {
+import com.codegym.model.Blog;
+
+public interface IBlogRepository extends Repository<Blog>{
 }
