@@ -4,48 +4,48 @@ import com.codegym.model.Blog;
 import com.codegym.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/blog")
 public class BlogController {
     @Autowired
     private IBlogService blogService;
 
-    @GetMapping("/blog")
+    @GetMapping("")
     public ModelAndView index() {
         return new ModelAndView("index", "blogs", blogService.findAll());
     }
 
-    @GetMapping("/blog/create")
-    public ModelAndView showCreateForm() {
-        ModelAndView modelAndView = new ModelAndView("create");
-        modelAndView.addObject("blog", new Blog());
-        return modelAndView;
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("blog", new Blog());
+        return "create";
     }
 
-    @PostMapping("/blog/create")
-    public ModelAndView createBlog(@ModelAttribute("blog") Blog blog) {
+    @PostMapping("/create")
+    public String save(@ModelAttribute("blog") Blog blog, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "New Blog CREATED");
         blogService.save(blog);
-        ModelAndView modelAndView = new ModelAndView("create", "blog", blog);
-        modelAndView.addObject("message", "New Blog CREATED");
-        return modelAndView;
+        return "redirect:/blog";
     }
 
-    @GetMapping("/blog/view/{id}")
-    public ModelAndView viewDetail(@PathVariable int id) {
-        return new ModelAndView("view", "blog", blogService.findById(id));
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable("id") Integer id, Model model) {
+        Blog blog = blogService.findById(id);
+        model.addAttribute("blog", blog);
+        return "view";
     }
 
-    @GetMapping("/blog/edit/{id}")
+    @GetMapping("/edit/{id}")
     public ModelAndView viewEditBlog(@PathVariable int id) {
         return new ModelAndView("edit", "blog", blogService.findById(id));
     }
 
-    @PostMapping("/blog/update")
+    @PostMapping("/update")
     public ModelAndView update(@ModelAttribute("blog") Blog blog) {
         blogService.save(blog);
         ModelAndView modelAndView = new ModelAndView("edit", "blog", blog);
@@ -53,12 +53,12 @@ public class BlogController {
         return modelAndView;
     }
 
-    @GetMapping("/blog/delete/{id}")
+    @GetMapping("/delete/{id}")
     public ModelAndView viewDelete(@PathVariable int id) {
         return new ModelAndView("delete", "blog", blogService.findById(id));
     }
 
-    @PostMapping("/blog/delete")
+    @PostMapping("/delete")
     public ModelAndView delete(@ModelAttribute("blog") Blog blog) {
         blogService.remove(blog.getId());
         ModelAndView modelAndView = new ModelAndView("index", "message", "Deleted Successfuly");

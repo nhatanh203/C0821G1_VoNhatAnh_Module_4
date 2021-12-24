@@ -11,13 +11,18 @@
 </th:block>
 <h1>Create Blog</h1>
 <form th:action="@{/blog/create}" th:object="${blog}" method="post" novalidate="novalidate">
+    <input type="hidden" th:field="*{id}"/>
     <div>
-        <label>Title: </label>
-        <input type="text" th:field="*{title}">
+        <label>Title</label>
     </div>
     <div>
-        <label>Content: </label>
-        <input type="text" th:field="*{content}">
+        <input type="text" th:field="*{title}"/>
+    </div>
+    <div>
+        <label>Content</label>
+    </div>
+    <div>
+        <input type="text" th:field="*{content}"/>
     </div>
     <input type="submit" value="Create">
 </form>
