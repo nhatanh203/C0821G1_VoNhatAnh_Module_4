@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<h3>View Blog</h3>
+<p>
+    <a th:href="@{/category}">
+        Back to category list
+    </a>
+</p>
+<div>
+    <h1 th:text="${category.id}"></h1>
+</div>
+<div>
+    <p th:text="${category.nameCategory}"></p>
+</div>
+
+</body>
+</html>>
