@@ -25,8 +25,8 @@ public class CategoryController {
     }
 
     @GetMapping("/view")
-    public String view(@RequestParam("id") String id, Model model) {
-        Category category = cateService.findById(Integer.parseInt(id));
+    public String view(@RequestParam("id") int id, Model model) {
+        Category category = cateService.findById(id);
         model.addAttribute("category", category);
         return "category/view";
     }
@@ -45,8 +45,8 @@ public class CategoryController {
     }
 
     @GetMapping("{id}/edit")
-    public String showEdit(@PathVariable(name = "id") String id, Model model) {
-        model.addAttribute("category", cateService.findById(Integer.parseInt(id)));
+    public String showEdit(@PathVariable(name = "id") int id, Model model) {
+        model.addAttribute("category", cateService.findById(id));
         return "category/edit";
     }
 
@@ -66,8 +66,8 @@ public class CategoryController {
     }
 
     @GetMapping("/delete")
-    public String showDelete(@RequestParam(name = "id") String id, Model model) {
-        model.addAttribute("category", cateService.findById(Integer.parseInt(id)));
+    public String showDelete(@RequestParam(name = "id") int id, Model model) {
+        model.addAttribute("category", cateService.findById(id));
         return "category/delete";
     }
 

@@ -24,7 +24,7 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public Category findById(int id) {
-        return iCateRepo.findById(String.valueOf(id)).orElse(null);
+        return iCateRepo.findById(id).orElse(null);
     }
 
     @Override
@@ -34,6 +34,6 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public void remove(int id) {
-        iCateRepo.deleteById(String.valueOf(id));
+        iCateRepo.deleteById(id);
     }
 }
