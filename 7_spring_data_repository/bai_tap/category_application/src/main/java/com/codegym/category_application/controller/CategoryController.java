@@ -3,6 +3,9 @@ package com.codegym.category_application.controller;
 import com.codegym.category_application.model.Category;
 import com.codegym.category_application.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +18,12 @@ public class CategoryController {
     @Autowired
     private ICategoryService cateService;
 
-    @GetMapping({"","/list"})
-    public ModelAndView index() {
-        Iterable<Category> categories = cateService.findAll();
-
-        ModelAndView modelAndView = new ModelAndView("/category/index");
-        modelAndView.addObject("categories", categories);
-        return modelAndView;
+        @GetMapping({"","/list"})
+    public String listPage(Model model, @RequestParam(value = "page", defaultValue = "0")int page){
+        Sort sort = Sort.by("id").descending();
+        Page<Category> catePage = cateService.findAll(PageRequest.of(page,3,sort));
+        model.addAttribute("catePage", catePage);
+        return "category/index";
     }
 
     @GetMapping("/view")

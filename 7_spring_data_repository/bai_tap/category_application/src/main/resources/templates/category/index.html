@@ -14,7 +14,7 @@
         <th>Delete</th>
         <th>View</th>
     </tr>
-    <th:block th:each="category : ${categories}">
+    <th:block th:each="category, iter : ${catePage}">
         <tr>
             <td th:text="${category.nameCategory}"></td>
             <td><a th:href="@{/category/edit/__${category.id}__ }">edit</a></td>
@@ -23,5 +23,18 @@
         </tr>
     </th:block>
 </table>
+<span>
+    <a th:if="${catePage.hasPrevious()}" th:href="@{/(page = ${catePage.number - 1})}">
+        Previous
+    </a>
+     <a th:if="${catePage.hasNext()}" th:href="@{/(page = ${catePage.number + 1})}">
+        Next
+    </a>
+    <p>
+        <span th:each="pageNo: ${#numbers.sequence(0,catePage.totalPages - 1)}">
+            <a th:href="@{/(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+    </p>
+</span>
 </body>
 </html>
