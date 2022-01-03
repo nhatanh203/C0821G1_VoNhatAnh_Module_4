@@ -1,39 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Shopping Cart</title>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
 </head>
 <body>
 <p>
-  <a href="/shop">Shop</a>
+    <a href="/shop">Shop</a>
 </p>
 <h1>Your Cart</h1>
+<ul>
+    <li>
+        <a href="/shopping-cart">Giỏ Hàng</a>
+    </li>
+    <li>
+        <a href="/shop">Đơn Hàng </a>
+    </li>
+    <li>
+        <a href="/pay">Thanh Toán</a>
+    </li>
+</ul>
+<div>
+    <p>Giỏ Hàng <span th:text="${cart.countProductQuantity()}"></span></p>
+</div>
 <form th:action="@{/shop}" th:object="${cart}" method="post">
-  <h3>Total Items: <span th:text="${cart.countItemQuantity()}"></span></h3>
-  <h3>Total Products: <span th:text="${cart.countProductQuantity()}"></span></h3>
-  <table border="1">
-    <tr>
-      <th>Item</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>
-    <tr th:each="product: ${cart.products}">
-      <td th:text="${product.getKey().name}"></td>
-      <td>
-        <a id="decrease_button" th:text="${'-'}"></a>
-        <span th:text="${product.getValue()}"></span>
-        <a id="increase_button" th:href="@{/add/__${product.getKey().id}__(action='show')}"
-           th:text="${'+'}"></a>
-      </td>
-      <td th:text="${product.getKey().price}"></td>
-    </tr>
-    <tr>
-      <td>Total</td>
-      <td></td>
-      <td th:text="${cart.countTotalPayment()}"></td>
-    </tr>
-  </table>
+    <h3>Total Items: <span th:text="${cart.countItemQuantity()}"></span></h3>
+    <h3>Total Products: <span th:text="${cart.countProductQuantity()}"></span></h3>
+    <table border = "1">
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="product: ${cart.products}">
+            <td th:text="${product.getKey().name}"></td>
+            <td>
+                <span>Tên <span th:text="${product.getKey().name}"></span></span>
+                <br>
+                <span>Số lượng
+                    <a th:href="@{/add/__${product.getKey().id}__(action='decrease')}"
+                       th:text="${'-'}">
+                    </a>
+
+                    <a th:href="@{/add/__${product.getKey().id}__(action='show')}"
+                       th:text="${'+'}">
+                    </a>
+                    <span th:text="${product.getValue()}"></span>
+                </span>
+                <span>Giá
+                    <span th:text="${product.getKey().price}"></span>
+                </span>
+                <a href="#" th:href="@{/view/(id = ${product.getKey().id})}">view</a>
+                <a href="#" th:href="@{/delete/(id = ${product.getKey().id})}">delete</a>
+            </td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
