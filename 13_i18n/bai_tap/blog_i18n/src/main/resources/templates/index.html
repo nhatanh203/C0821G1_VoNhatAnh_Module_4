@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nhat Anh Blog</title>
+</head>
+<body>
+<th:block th:if="${message}">
+    <h2 th:text="${message}"></h2>
+</th:block>
+<form action="" method="get">
+    <select name="lang">
+        <option value="vi">Vietnamese</option>
+        <option value="en">English</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+<a href="/blog/create">Create a blog</a>
+<h3 th:text="#{blog.title}"></h3>
+<table style="border: #831429 solid 1px">
+    <tr>
+        <th th:text="#{blog.title1}"></th>
+        <th th:text="#{blog.edit}"></th>
+        <th th:text="#{blog.delete}"></th>
+        <th th:text="#{blog.view}"></th>
+    </tr>
+    <th:block th:each="blog : ${blogs}">
+        <tr>
+            <td th:text="${blog.title}"></td>
+            <td><a th:href="@{/blog/edit/__${blog.id}__ }">edit</a></td>
+            <td><a th:href="@{/blog/delete/__${blog.id}__ }">delete</a></td>
+            <td><a th:href="@{/blog/view/__${blog.id}__ }">view</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
