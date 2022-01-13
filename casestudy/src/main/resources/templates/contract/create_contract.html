@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Contract</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<button type="button" class="btn btn-warning">
+    <a th:href="@{/contract}">
+        Back to list
+    </a>
+</button>
+<form th:action="@{/contract/save}" th:object="${contract}"
+      method="POST" novalidate="novalidate">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Check In</label>
+        <div class="col-sm-10">
+            <input type="date" th:field="*{checkIn}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('checkIn')}" th:errors="*{checkIn}"></p>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Check Out</label>
+        <div class="col-sm-10">
+            <input type="date" th:field="*{checkOut}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('checkOut')}" th:errors="*{checkOut}"></p>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Deposit</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{deposit}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}"></p>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Total Money</label>
+        <div class="col-sm-10">
+            <input type="text" th:field="*{totalMoney}"/>
+            <p class="text-danger" th:if="${#fields.hasErrors('totalMoney')}" th:errors="*{totalMoney}"></p>
+
+        </div>
+    </div>
+
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Customer</label>
+        <div class="col-sm-10">
+            <select th:field="*{customer}">
+                <option th:each="customer : ${customerList}" th:value="${customer.id}" th:text="${customer.name}">
+
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Employee</label>
+        <div class="col-sm-10">
+            <select th:field="*{employee}">
+                <option th:each="employee : ${employeeList}" th:value="${employee.id}" th:text="${employee.name}">
+
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Service</label>
+        <div class="col-sm-10">
+            <select th:field="*{services}">
+                <option th:each="services : ${servicesList}" th:value="${services.id}" th:text="${services.name}">
+
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

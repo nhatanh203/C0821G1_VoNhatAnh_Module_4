@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Customer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/v4-shims.min.css"
+          integrity="sha512-p++g4gkFY8DBqLItjIfuKJPFvTPqcg2FzOns2BNaltwoCOrXMqRIOqgWqWEvuqsj/3aVdgoEo2Y7X6SomTfUPA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Search Customer</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<hr>
+<button type="button" class="btn btn-warning">
+    <a class="link-light" th:href="@{/customer}">
+        Back to list
+    </a>
+</button>
+<hr>
+<div class="container-fluid">
+    <div class="row">
+        <div class="row">
+            <form action="#" th:action="@{/customer/search}" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                       id="nameBlog" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="search">Tìm kiếm</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped w-50 mx-auto">
+            <thead class="thead-inverse">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Birth Day</th>
+                <th>Gender</th>
+                <th>Id Card</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Customer Type</th>
+            </tr>
+            </thead>
+            <tbody id="content">
+            <tr th:each="customer,rowstat : ${customerList}">
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.name}"></td>
+                <td th:text="${customer.birthDay}"></td>
+                <td th:text="${customer.gender}"></td>
+                <td th:text="${customer.identityCard}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td th:text="${customer.email}"></td>
+                <td th:text="${customer.address}"></td>
+                <td th:text="${customer.customerType.nameType}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

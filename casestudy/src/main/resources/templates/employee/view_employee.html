@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<body>
+<button type="button" class="btn btn-warning">
+    <a class="link-light" th:href="@{/employee}">
+        Back to list
+    </a>
+</button>
+<div class="row">
+    <table class="table table-striped w-50 mx-auto">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Birth Day</th>
+            <th>Id Card</th>
+            <th>Salary</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+        </tr>
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.birthDay}"></td>
+            <td th:text="${employee.idCard}"></td>
+            <td th:text="${employee.salary}"></td>
+            <td th:text="${employee.phone}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.address}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
