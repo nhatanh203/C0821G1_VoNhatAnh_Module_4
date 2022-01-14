@@ -59,7 +59,7 @@ public class ServiceController {
     public String showEditParam(@RequestParam(name = "id") Integer id, Model model) {
         model.addAttribute("service", iServiceSer.findById(id));
         model.addAttribute("serviceTypeList",iServiceTypeSer.getAll());
-        return "edit_service";
+        return "service/edit_service";
     }
 
     @PostMapping("/edit")
@@ -68,7 +68,7 @@ public class ServiceController {
         new Services().validate(service,bindingResult);
         if (bindingResult.hasErrors()){
             model.addAttribute("serviceTypeList",iServiceTypeSer.getAll());
-            return "service/create";
+            return "service/create_service";
         }
         iServiceSer.save(service);
         redirectAttributes.addFlashAttribute("message", "Edit Complete !");
