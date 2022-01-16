@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/v4-shims.min.css"
+          integrity="sha512-p++g4gkFY8DBqLItjIfuKJPFvTPqcg2FzOns2BNaltwoCOrXMqRIOqgWqWEvuqsj/3aVdgoEo2Y7X6SomTfUPA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<button type="button" class="btn btn-success">
+    <a th:href="@{/user/create}" style="text-decoration: none" class="btn-info">Create User</a>
+</button>
+<hr>
+<div class="container-fluid">
+    <div class="row">
+        <div class="row">
+            <form action="#" th:action="@{/user/search}" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                       id="nameBlog" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="search">Tìm kiếm</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped w-50 mx-auto">
+            <thead class="thead-inverse">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Birth Day</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>User Type</th>
+                <th>Delete</th>
+                <th>Edit</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody id="content">
+            <tr th:each="user,rowstat : ${userList}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.birthDay}"></td>
+                <td th:text="${user.gender}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.userType.nameType}"></td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-delete" data-toggle="modal"
+                            data-target="#deleteModal" th:data-id123="${user.id}" th:data-name="${user.name}">
+                        Delete
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning">
+                        <a th:href="@{/user/edit_parameter/(id = ${user.id})}">
+                            Edit
+                        </a>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning">
+                        <a th:href="@{/user/{id}/view(id=${user.getId()})}">
+                            View
+                        </a>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want delete <span id="name-delete" class="text-danger"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a id="link-delete" class="btn btn-danger" href="">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<span>
+    <button type="button" class="btn btn-warning">
+    <a th:if="${userList.hasPrevious()}" th:href="@{/user/(page = ${userList.number - 1})}">
+        Previous
+    </a>
+    </button>
+     <span>
+        <span th:each="pageNo: ${#numbers.sequence(0,userList.totalPages - 1)}">
+            <a th:href="@{/user/(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+     </span>
+     <button type="button" class="btn btn-warning">
+   <a th:if="${userList.hasNext()}" th:href="@{/user/(page = ${userList.number + 1})}">
+        Next
+    </a>
+    </button>
+</span>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".btn-delete").click(function () {
+            let id = this.dataset.id123;
+            let name = this.dataset.name;
+            $('#name-delete').html(name);
+            $('#link-delete').attr("href", "http://localhost:8080/user/delete?id=" + id);
+            $.ajax(
+                {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
+                    },
+                    type: "DELETE",
+                    url: `http://localhost:8080/user/delete?id=` + id,
+                    success: function () {
+                        $('#deleteModal').close();
+                    }
+                }
+            )
+        });
+    });
+</script>
+</html>
