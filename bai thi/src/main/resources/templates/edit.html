@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<H1>Sửa bài hát</H1>
+<form action="/edit" method="post" th:object="${sanpham}">
+<!--    <input type="hidden" th:field="*{id}">-->
+    <p>Loại Sản Phẩm</p>
+    <input th:field="*{loaiSanPham.getMaLoaiSp()}">
+<!--    <p style="color: red" th:if="${#fields.hasErrors('tenBaiHat')}" th:errors="*{tenBaiHat}"></p>-->
+    <p>Sản Phẩm</p>
+    <input th:field="*{tenSp}">
+<!--    <p style="color: red" th:if="${#fields.hasErrors('ngheSi')}" th:errors="*{ngheSi}"></p>-->
+    <p>Ngày mua</p>
+    <input th:field="*{donHang.getNgayMua()}">
+<!--    <p style="color: red" th:if="${#fields.hasErrors('theLoaiNhac')}" th:errors="*{theLoaiNhac}"></p>-->
+    <input type="submit" value="edit">
+
+</form>
+</body>
+</html>

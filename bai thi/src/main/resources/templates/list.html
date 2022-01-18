@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<h1>Đơn hàng</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <td>Mã đơn hàng</td>
+        <td>Tên Sản phẩm</td>
+        <td>Giá(USD)</td>
+        <td>Loại Sản Phẩm</td>
+        <td>Ngày mua</td>
+        <td>Số lượng</td>
+        <td>Đơn giá</td>
+        <Td>Action</Td>
+    </tr>
+    </thead>
+    <tr th:each="sanpham, iter : ${sanPhamPage}">
+        <td th:text="${sanpham.getMaSp()}"></td>
+        <td th:text="${sanpham.getTenSp()}"></td>
+        <td th:text="${sanpham.getGiaSp()}"></td>
+        <td th:text="${sanpham.getGiaSp()}"></td>
+        <td th:text="${sanpham.loaiSanPham.getMaLoaiSp()}"></td>
+        <td th:text="${sanpham.donHang.getNgayMua()}"></td>
+        <td th:text="${sanpham.donHang.getSoLuong()}"></td>
+        <td th:text="${sanpham.getGiaSp()}"></td>
+        <td><a th:href="@{edit(idEdit=${sanpham.getMaSp()})}">Edit</a></td>-->
+    </tr>
+<!--    <tr th:each="sanpham, iter : ${listsanpham}">-->
+<!--        <td th:text="${sanpham.getMaSp()}"></td>-->
+<!--        <td th:text="${sanpham.getTenSp()}"></td>-->
+<!--        <td th:text="${sanpham.getGiaSp()}"></td>-->
+<!--        <td th:text="${sanpham.loaiSanPham.getMaLoaiSp()}"></td>-->
+<!--        <td th:text="${sanpham.donHang.getNgayMua()}"></td>-->
+<!--        <td th:text="${sanpham.donHang.getSoLuong()}"></td>-->
+<!--        <td th:text="${sanpham.getGiaSp()}"></td>-->
+<!--        <td><a th:href="@{edit(idEdit=${sanpham.getMaSp()})}">Edit</a></td>-->
+<!--    </tr>-->
+</table>
+<div style="text-align: center">
+    <span>
+    <a th:if="${sanPhamPage.hasPrevious()}" th:href="@{/list/(page = ${sanPhamPage.number - 1})}">
+        Previous
+    </a>
+     <a th:if="${sanPhamPage.hasNext()}" th:href="@{/list/(page = ${sanPhamPage.number + 1})}">
+        Next
+    </a>
+    <p>
+        <span th:each="pageNo: ${#numbers.sequence(0,sanPhamPage.totalPages - 1)}">
+            <a th:href="@{/list/(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+    </p>
+</span>
+</div>
+</body>
+</html>
